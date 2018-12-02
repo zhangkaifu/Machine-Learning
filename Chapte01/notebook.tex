@@ -1,0 +1,1420 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Supervised\_Learning}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{"""打印ASCII字母表、数字、标点符号"""}\label{ux6253ux5370asciiux5b57ux6bcdux8868ux6570ux5b57ux6807ux70b9ux7b26ux53f7}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{string}
+        \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{p}{[}\PY{n}{string}\PY{o}{.}\PY{n}{ascii\PYZus{}letters}\PY{p}{,}\PY{n}{string}\PY{o}{.}\PY{n}{digits}\PY{p}{,}\PY{n}{string}\PY{o}{.}\PY{n}{punctuation}\PY{p}{]}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{p}{,}\PY{n}{item}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+52	abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+10	0123456789
+32	!"\#\$\%\&'()*+,-./:;<=>?@[\textbackslash{}]\^{}\_`\{|\}\textasciitilde{}
+
+    \end{Verbatim}
+
+    \subsection{命令模式快捷键（按 Esc
+键开启）}\label{ux547dux4ee4ux6a21ux5f0fux5febux6377ux952eux6309-esc-ux952eux5f00ux542f}
+
+\begin{verbatim}
+快捷键 作用  说明
+Enter   转入编辑模式  
+Shift-Enter 运行本单元，选中下个单元    新单元默认为命令模式
+Ctrl-Enter  运行本单元   
+Alt-Enter   运行本单元，在其下插入新单元  新单元默认为编辑模式
+Y   单元转入代码状态    
+M   单元转入 markdown 状态    
+R   单元转入 raw 状态 
+1   设定 1 级标题    仅在 markdown 状态下时建议使用标题相关快捷键，如果单元处于其他状态，则会强制切换到 markdown 状态
+2   设定 2 级标题    
+3   设定 3 级标题    
+4   设定 4 级标题    
+5   设定 5 级标题    
+6   设定 6 级标题    
+Up  选中上方单元  
+K   选中上方单元  
+Down    选中下方单元  
+J   选中下方单元  
+Shift-K 连续选择上方单元    
+Shift-J 连续选择下方单元    
+A   在上方插入新单元    
+B   在下方插入新单元    
+X   剪切选中的单元 
+C   复制选中的单元 
+Shift-V 粘贴到上方单元 
+V   粘贴到下方单元 
+Z   恢复删除的最后一个单元 
+D,D 删除选中的单元 连续按两个 D 键
+Shift-M 合并选中的单元 
+Ctrl-S  保存当前 NoteBook   
+S   保存当前 NoteBook   
+L   开关行号    编辑框的行号是可以开启和关闭的
+O   转换输出    
+Shift-O 转换输出滚动  
+Esc 关闭页面    
+Q   关闭页面    
+H   显示快捷键帮助 
+I,I 中断 NoteBook 内核  
+0,0 重启 NoteBook 内核  
+Shift   忽略  
+Shift-Space 向上滚动    
+Space   向下滚动    
+\end{verbatim}
+
+\subsection{编辑模式快捷键（ 按 Enter
+键启动）:}\label{ux7f16ux8f91ux6a21ux5f0fux5febux6377ux952e-ux6309-enter-ux952eux542fux52a8}
+
+\begin{verbatim}
+快捷键 作用  说明
+Tab 代码补全或缩进 
+Shift-Tab   提示  输出帮助信息，部分函数、类、方法等会显示其定义原型，如果在其后加 ? 再运行会显示更加详细的帮助
+Ctrl-]  缩进  向右缩进
+Ctrl-[  解除缩进    向左缩进
+Ctrl-A  全选  
+Ctrl-Z  撤销  
+Ctrl-Shift-Z    重做  
+Ctrl-Y  重做  
+Ctrl-Home   跳到单元开头  
+Ctrl-Up 跳到单元开头  
+Ctrl-End    跳到单元末尾  
+Ctrl-Down   跳到单元末尾  
+Ctrl-Left   跳到左边一个字首    
+Ctrl-Right  跳到右边一个字首    
+Ctrl-Backspace  删除前面一个字 
+Ctrl-Delete 删除后面一个字 
+Esc 切换到命令模式 
+Ctrl-M  切换到命令模式 
+Shift-Enter 运行本单元，选中下一单元    新单元默认为命令模式
+Ctrl-Enter  运行本单元   
+Alt-Enter   运行本单元，在下面插入一单元  新单元默认为编辑模式
+Ctrl-Shift– 分割单元    按光标所在行进行分割
+Ctrl-Shift-Subtract 分割单元    
+Ctrl-S  保存当前 NoteBook   
+Shift   忽略  
+Up  光标上移或转入上一单元 
+Down    光标下移或转入下一单元 
+\end{verbatim}
+
+    \section{一、监督学习}\label{ux4e00ux76d1ux7763ux5b66ux4e60}
+
+\begin{verbatim}
+ 数据预处理技术 
+ 标记编码方法 
+ 创建线性回归器（linear regressor） 
+ 计算回归准确性
+ 保存模型数据 
+ 创建岭回归器（ridge regressor） 
+ 创建多项式回归器（polynomial regressor） 
+ 估算房屋价格 
+ 计算特征的相对重要性 
+ 评估共享单车的需求分布 
+\end{verbatim}
+
+    \subsection{1.1Python是如何对数据进行预处理}\label{pythonux662fux5982ux4f55ux5bf9ux6570ux636eux8fdbux884cux9884ux5904ux7406}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.4}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{2.1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{3.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.9}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{1. 均值移除（Mean
+removal）}\label{ux5747ux503cux79fbux9664mean-removal}
+
+\begin{verbatim}
+通常我们会把每个特征的平均值移除，以保证特征均值为0（即标准化处理）。这样做可以消 除特征彼此间的偏差（bias）
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data\PYZus{}standardized} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{data\PYZus{}standardized}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} array([  5.55111512e-17,  -1.11022302e-16,  -7.40148683e-17,
+                -7.40148683e-17])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{data\PYZus{}standardized}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} array([ 1.,  1.,  1.,  1.])
+\end{Verbatim}
+            
+    \subsection{2.范围缩放（Scaling）}\label{ux8303ux56f4ux7f29ux653escaling}
+
+\begin{verbatim}
+数据点中每个特征的数值范围可能变化很大，因此，有时将特征的数值范围缩放到合理的大 小是非常重要的。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{data\PYZus{}scaler} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{MinMaxScaler}\PY{p}{(}\PY{n}{feature\PYZus{}range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}特征范围(feature\PYZus{}range)}
+        \PY{n}{data\PYZus{}scaled} \PY{o}{=} \PY{n}{data\PYZus{}scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{c+c1}{\PYZsh{}菲特氏变换(fit\PYZus{}transform)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Min max scaled data :}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data\PYZus{}scaled} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Min max scaled data :
+ [[ 1.          0.          1.          0.        ]
+ [ 0.          1.          0.41025641  1.        ]
+ [ 0.33333333  0.87272727  0.          0.14666667]]
+
+    \end{Verbatim}
+
+    \subsection{3.
+归一化（Normalization）}\label{ux5f52ux4e00ux5316normalization}
+
+\begin{verbatim}
+数据归一化用于需要对特征向量的值进行调整时，以保证每个特征向量的值都缩放到相同的 数值范围。机器学习中最常用的归一化形式就是将特征向量调整为L1范数，使特征向量的数值之 和为1。
+
+这个方法经常用于确保数据点没有因为特征的基本性质而产生较大差异，即确保数据处于同 一数量级，提高不同特征数据的可比性。 
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{data\PYZus{}normalized} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{norm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{L1 normalized data :}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data\PYZus{}normalized}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+L1 normalized data :
+ [[ 0.25210084 -0.12605042  0.16806723 -0.45378151]
+ [ 0.          0.625      -0.046875    0.328125  ]
+ [ 0.0952381   0.31428571 -0.18095238 -0.40952381]]
+
+    \end{Verbatim}
+
+    \subsection{4.
+二值化（Binarization）}\label{ux4e8cux503cux5316binarization}
+
+\begin{verbatim}
+二值化用于将数值特征向量转换为布尔类型向量。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{data\PYZus{}binarized} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{Binarizer}\PY{p}{(}\PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{data\PYZus{}binarized}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} array([[ 1.,  0.,  1.,  0.],
+                [ 0.,  1.,  0.,  1.],
+                [ 0.,  1.,  0.,  0.]])
+\end{Verbatim}
+            
+    \subsection{5. 独热编码}\label{ux72ecux70edux7f16ux7801}
+
+\begin{verbatim}
+通常，需要处理的数值都是稀疏地、散乱地分布在空间中，然而，我们并不需要存储这些大 数值，这时就需要使用独热编码（One-Hot Encoding）。可以把独热编码看作是一种收紧（tighten） 特征向量的工具。它把特征向量的每个特征与特征的非重复总数相对应，通过one-of-k的形式对 每个值进行编码。特征向量的每个特征值都按照这种方式编码，这样可以更加有效地表示空间。 例如，我们需要处理4维向量空间，当给一个特性向量的第n个特征进行编码时，编码器会遍历每 个特征向量的第n个特征，然后进行非重复计数。如果非重复计数的值是K，那么就把这个特征转 换为只有一个值是1其他值都是0的K维向量。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{encoder} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{OneHotEncoder}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{encoder}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{encoded\PYZus{}vector} \PY{o}{=} \PY{n}{encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{encoded\PYZus{}vector}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} array([[ 0.,  0.,  1.,  0.,  1.,  0.,  0.,  0.,  1.,  1.,  0.]])
+\end{Verbatim}
+            
+    在上面的示例中，观察一下每个特征向量的第三个特征，分别是1、5、2、4这4个不重复的
+值，也就是说独热编码向量的长度是4。如果你需要对5进行编码，那么向量就是{[}0,
+1, 0, 0{]}。 向量中只有一个值是1。第二个元素是1，对应的值是5。
+
+    \subsection{1.2
+标记编码方法}\label{ux6807ux8bb0ux7f16ux7801ux65b9ux6cd5}
+
+\begin{verbatim}
+在监督学习中，经常需要处理各种各样的标记。这些标记可能是数字，也可能是单词。如果 标记是数字，那么算法可以直接使用它们，但是，许多情况下，标记都需要以人们可理解的形式 存在，因此，人们通常会用单词标记训练数据集。标记编码就是要把单词标记转换成数值形式， 让算法懂得如何操作标记。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+\end{Verbatim}
+
+
+    定义一个标记编码器（label encoder）
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{label\PYZus{}encoder} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+ label_encoder对象知道如何理解单词标记。
+ 创建一些标记
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{input\PYZus{}classes} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{audi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ford}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{audi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{toyota}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ford}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmw}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    为标记编码
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{input\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} LabelEncoder()
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{classes\PYZus{}}\PY{p}{)}\PY{p}{:}\PY{c+c1}{\PYZsh{}枚举(enumerate)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{item}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+audi --> 0
+bmw --> 1
+ford --> 2
+toyota --> 3
+
+    \end{Verbatim}
+
+    单词被转换成从0开始的索引值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{toyota}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ford}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{audi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  
+         \PY{n}{encoded\PYZus{}labels} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{labels}\PY{p}{)} 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Labels =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{labels} \PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Encoded labels =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{encoded\PYZus{}labels}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Labels = ['toyota', 'ford', 'audi']
+Encoded labels = [3, 2, 0]
+
+    \end{Verbatim}
+
+    可以通过数字反转回单词的功 能检查结果的正确性
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{encoded\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} 
+         \PY{n}{decoded\PYZus{}labels} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{encoded\PYZus{}labels}\PY{p}{)}  
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Encoded labels =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoded\PYZus{}labels} \PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decoded labels =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{decoded\PYZus{}labels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Encoded labels = [2, 1, 0, 3, 1]
+Decoded labels = ['ford', 'bmw', 'audi', 'toyota', 'bmw']
+
+    \end{Verbatim}
+
+    \subsection{1.3
+创建线性回归器}\label{ux521bux5efaux7ebfux6027ux56deux5f52ux5668}
+
+\begin{verbatim}
+回归是估计输入数据与连续值输出数据之间关系的过程。数据通常是实数形式的，我们的目 标是估计满足输入到输出映射关系的基本函数。
+\end{verbatim}
+
+    \begin{verbatim}
+输入 与输出映射关系： 
+
+1 → 2
+3 → 6 
+4.3 → 8.6
+7.1 → 14.2
+
+发现输出 结果一直是输入数据的两倍，因此输入与输出的转换公式就是这样： 
+
+f(x) = 2x 
+
+这是体现输入值与输出值关联关系的一个简单函数。
+\end{verbatim}
+
+    线性回归的目标是提取输入变量与输出变量的关联线性模型，这就要求实际输出与线性方程
+预测的输出的残差平方和（sum of squares of
+differences）最小化。这种方法被称为普通最小二乘 法（Ordinary Least
+Squares，OLS）。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{filename} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{argv}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}打开数据集}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data\PYZus{}singlevar.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:} 
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+                \PY{n}{xt}\PY{p}{,} \PY{n}{yt} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} 
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{xt}\PY{p}{)}
+                \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yt}\PY{p}{)} 
+        
+                \PY{c+c1}{\PYZsh{}把数据分成训练数据集与测试数据集}
+        \PY{n}{num\PYZus{}training} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.8} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{num\PYZus{}test} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}training} 
+        
+        \PY{c+c1}{\PYZsh{} 训练数据 }
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}training}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{} 测试数据 }
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}线性模型}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model} 
+        \PY{c+c1}{\PYZsh{} 创建线性回归对象 }
+        \PY{n}{linear\PYZus{}regressor} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{} 用训练数据集训练模型 ：}
+        \PY{c+c1}{\PYZsh{}利用训练数据集训练了线性回归器。向fit方法提供输入数据即可训练模型}
+        \PY{n}{linear\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{}画图:线性回归拟合效果}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{n}{y\PYZus{}train\PYZus{}pred} \PY{o}{=} \PY{n}{linear\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}pred}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{}用模型对测试数据集进行预测}
+        \PY{n}{y\PYZus{}test\PYZus{}pred} \PY{o}{=} \PY{n}{linear\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{1.4
+计算回归准确性}\label{ux8ba1ux7b97ux56deux5f52ux51c6ux786eux6027}
+
+\begin{verbatim}
+现在已经建立了回归器，接下来最重要的就是如何评价回归器的拟合效果。在模型评价的相 关内容中，用误差（error）表示实际值与模型预测值之间的差值。 
+\end{verbatim}
+
+    \subparagraph{衡量指标}\label{ux8861ux91cfux6307ux6807}
+
+\begin{verbatim}
+衡量回归器拟合效果的重要指标（metric）。回归器可以用许多不同的指标进行衡量。
+
+ 平均绝对误差（mean absolute error）：这是给定数据集的所有数据点的绝对误差平均 值。 
+ 均方误差（mean squared error）：这是给定数据集的所有数据点的误差的平方的平均值。 这是最流行的指标之一。
+ 中位数绝对误差（median absolute error）：这是给定数据集的所有数据点的误差的中位 数。这个指标的主要优点是可以消除异常值（outlier）的干扰。测试数据集中的单个坏点 不会影响整个误差指标，均值误差指标会受到异常点的影响。 
+ 解释方差分（explained variance score）：这个分数用于衡量我们的模型对数据集波动 的解释能力。如果得分1.0分，那么表明我们的模型是完美的。 
+ R方得分（R2 score）：这个指标读作“R方”，是指确定性相关系数，用于衡量模型对未 知样本预测的效果。最好的得分是1.0，值也可以是负数。 
+\end{verbatim}
+
+    \subparagraph{scikit-learn里面有一个模块，提供了计算所有指标的功能。}\label{scikit-learnux91ccux9762ux6709ux4e00ux4e2aux6a21ux5757ux63d0ux4f9bux4e86ux8ba1ux7b97ux6240ux6709ux6307ux6807ux7684ux529fux80fd}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{import} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{as} \PY{n+nn}{sm}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{平均绝对误差(Mean absolute error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{均方误差(Mean squared error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{中位数绝对误差(Median absolute error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{median\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{解释方差分(Explained variance score )=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{R方得分(R2 score)=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+平均绝对误差(Mean absolute error) = 0.54
+
+均方误差(Mean squared error) = 0.38
+
+中位数绝对误差(Median absolute error) = 0.54
+
+解释方差分(Explained variance score )= 0.68
+
+R方得分(R2 score)= 0.68
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+每个指标都描述得面面俱到是非常乏味的，因此只选择一两个指标来评估我们的模型。通常 的做法是尽量保证均方误差最低，而且解释方差分最高。 
+\end{verbatim}
+
+    \subparagraph{1.5保存模型数据}\label{ux4fddux5b58ux6a21ux578bux6570ux636e}
+
+\begin{verbatim}
+模型训练结束之后，如果能够把模型保存成文件，那么下次再使用的时候，只要简单地加载 就可以了。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{import} \PY{n+nn}{pickle} \PY{k}{as} \PY{n+nn}{pk}
+         
+         \PY{c+c1}{\PYZsh{}回归模型会保存在saved\PYZus{}model.pkl文件中。}
+         \PY{n}{output\PYZus{}model\PYZus{}file} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saved\PYZus{}model.pkl}\PY{l+s+s1}{\PYZsq{}}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{pk}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{linear\PYZus{}regressor}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}是把回归模型从Pickle文件加载到model\PYZus{}linregr变量中。}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{model\PYZus{}linregr} \PY{o}{=} \PY{n}{pk}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}新图}
+         \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}new} \PY{o}{=} \PY{n}{model\PYZus{}linregr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}new}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{新的平均绝对误差 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}new}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+新的平均绝对误差 = 0.54
+
+    \end{Verbatim}
+
+    \subsection{1.6
+创建岭回归器}\label{ux521bux5efaux5cadux56deux5f52ux5668}
+
+\begin{verbatim}
+线性回归的主要问题是对异常值敏感。在真实世界的数据收集过程中，经常会遇到错误的度 量结果。而线性回归使用的普通最小二乘法，其目标是使平方误差最小化。这时，由于异常值误 差的绝对值很大，因此会引起问题，从而破坏整个模型。 
+\end{verbatim}
+
+    \begin{verbatim}
+普通最小二乘法在建模时会考虑每个数据点的影响，为了避免这个问题，我们引入正则化项的系数作 为阈值来消除异常值的影响。这个方法被称为岭回归。 
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pickle} \PY{k}{as} \PY{n+nn}{pk}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data\PYZus{}singlevar.txt}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}打开数据集}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:} 
+            \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+                \PY{n}{xt}\PY{p}{,} \PY{n}{yt} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} 
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{xt}\PY{p}{)}
+                \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yt}\PY{p}{)} 
+        \PY{c+c1}{\PYZsh{}把数据分成训练数据集与测试数据集}
+        \PY{n}{num\PYZus{}training} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.8} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{num\PYZus{}test} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}training} 
+        
+        \PY{c+c1}{\PYZsh{} 训练数据 }
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}training}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{} 测试数据 }
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+            
+            
+        \PY{c+c1}{\PYZsh{}保存模型}
+        \PY{k}{def} \PY{n+nf}{save\PYZus{}model}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}filename}\PY{p}{,} \PY{n}{data\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                \PY{n}{pk}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{data\PYZus{}name}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}加载模型}
+        \PY{k}{def} \PY{n+nf}{load\PYZus{}model}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}filename}\PY{p}{)}\PY{p}{:}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}model\PYZus{}filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                \PY{n}{model\PYZus{}data\PYZus{}name} \PY{o}{=} \PY{n}{pk}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+            \PY{k}{return} \PY{n}{model\PYZus{}data\PYZus{}name}
+        
+        
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}  alpha参数控制回归器的复杂程度。}
+        \PY{l+s+sd}{     当alpha趋于0时，岭回归器就是用普通最小二乘法 的线性回归器。}
+        \PY{l+s+sd}{     因此，如果你希望模型对异常值不那么敏感，就需要设置一个较大的alpha值。 }
+        \PY{l+s+sd}{     这里把alpha值设置为0.01。 }
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}创建并初始化岭回归器}
+        \PY{n}{ridge\PYZus{}regressor} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{}训练岭回归器}
+        \PY{n}{ridge\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}画图}
+        \PY{c+c1}{\PYZsh{}训练图}
+        \PY{n}{y\PYZus{}train\PYZus{}pred\PYZus{}ridge} \PY{o}{=} \PY{n}{linear\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}pred\PYZus{}ridge}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ridge Training data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{}测试图}
+        \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge} \PY{o}{=} \PY{n}{ridge\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ridge Test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{}评估}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{平均绝对误差(Mean absolute error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{均方误差(Mean squared error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{中位数绝对误差(Median absolute error) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{median\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{解释方差分(Explained variance score )=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{R方得分(R2 score)=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+平均绝对误差(Mean absolute error) = 0.54
+
+均方误差(Mean squared error) = 0.38
+
+中位数绝对误差(Median absolute error) = 0.54
+
+解释方差分(Explained variance score )= 0.68
+
+R方得分(R2 score)= 0.68
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}保存模型}
+         \PY{n}{save\PYZus{}model}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Output\PYZus{}model\PYZus{}ridge.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ridge\PYZus{}regressor}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data\PYZus{}singlevar.txt}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}打开数据集}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:} 
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+                 \PY{n}{xt}\PY{p}{,} \PY{n}{yt} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} 
+                 \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{xt}\PY{p}{)}
+                 \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yt}\PY{p}{)} 
+         
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{model\PYZus{}ridge} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Output\PYZus{}model\PYZus{}ridge.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge\PYZus{}new} \PY{o}{=} \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}pred\PYZus{}ridge\PYZus{}new}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ridge Test data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    data:2018.10.26
+
+    \subsection{1.7
+创建多项式回归器}\label{ux521bux5efaux591aux9879ux5f0fux56deux5f52ux5668}
+
+\begin{verbatim}
+线性回归模型有一个主要的局限性，那就是它只能把输入数据拟合成直线，而多项式回归模 型通过拟合多项式方程来克服这类问题，从而提高模型的准确性。 
+模型的曲率是由多项式 的次数决定的。随着模型曲率的增加，模型变得更准确。但是，增加曲率的同时也增加了模型的 复杂性，因此拟合速度会变慢。当我们对模型的准确性的理想追求与计算能力限制的残酷现实发 生冲突时，就需要综合考虑了。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pickle} \PY{k}{as} \PY{n+nn}{pk}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+         \PY{k+kn}{import} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data\PYZus{}singlevar.txt}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}打开数据集}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:} 
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+                 \PY{n}{xt}\PY{p}{,} \PY{n}{yt} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} 
+                 \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{xt}\PY{p}{)}
+                 \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yt}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}把数据分成训练数据集与测试数据集}
+         \PY{n}{num\PYZus{}training} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}  
+         \PY{n}{num\PYZus{}test} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}training} 
+         
+         \PY{c+c1}{\PYZsh{} 训练数据 }
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}training}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{} 测试数据 }
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}导入多项式包}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{PolynomialFeatures}
+        \PY{c+c1}{\PYZsh{}线性模型}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        
+        \PY{c+c1}{\PYZsh{}将曲线的多项式的次数的初始值设置（degree）}
+        \PY{n}{polynomial} \PY{o}{=} \PY{n}{PolynomialFeatures}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}用数据点来计算多项式的参数}
+        \PY{n}{X\PYZus{}train\PYZus{}transformed} \PY{o}{=} \PY{n}{polynomial}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{c+c1}{\PYZsh{}菲特氏变换}
+        
+        \PY{c+c1}{\PYZsh{}训练模型}
+        \PY{n}{poly\PYZus{}linear\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+        \PY{n}{poly\PYZus{}linear\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}transformed}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{y\PYZus{}test}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} array([ 2.85,  4.86,  1.31,  3.99,  2.92,  4.72,  3.83,  2.58,  2.89,  1.99])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}多项式模型}
+        \PY{n}{poly\PYZus{}datapoint} \PY{o}{=} \PY{n}{polynomial}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+        \PY{n}{poly\PYZus{}linear\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{poly\PYZus{}datapoint}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 1.9543707913512338
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{linear\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{c+c1}{\PYZsh{}线性模型测试}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 2.2036989239267122
+\end{Verbatim}
+            
+    \begin{verbatim}
+多项式回归模型的预测值更接近实际的输出值。如果想要数据更接近实际输出值， 就需要增加多项式的次数。 
+\end{verbatim}
+#画图
+#测试数据集
+poly_test = polynomial.fit_transform(X_test)
+y_train_pred_ridge = poly_linear_model.predict(poly_test)
+
+plt.figure() 
+plt.scatter(X_test, y_test, color='green') 
+plt.plot(X_test, y_train_pred_ridge, color='black', linewidth=1) 
+plt.title('Poly test data')
+plt.show() 
+    \subsection{1.8
+估算房屋价格}\label{ux4f30ux7b97ux623fux5c4bux4ef7ux683c}
+
+\begin{verbatim}
+使用带AdaBoost算法的决策树回归器（decision tree regressor）来解决这个问题。 
+决策树是一个树状模型，每个节点都做出一个决策，从而影响最终结果。叶子节点表示输出 数值，分支表示根据输入特征做出的中间决策。AdaBoost算法是指自适应增强（adaptive boosting） 算法，这是一种利用其他系统增强模型准确性的技术。这种技术是将不同版本的算法结果进行组 合，用加权汇总的方式获得最终结果，被称为弱学习器（weak learners）。AdaBoost算法在每个阶 段获取的信息都会反馈到模型中，这样学习器就可以在后一阶段重点训练难以分类的样本。这种 学习方式可以增强系统的准确性。 
+首先使用AdaBoost算法对数据集进行回归拟合，再计算误差，然后根据误差评估结果，用同 样的数据集重新拟合。可以把这些看作是回归器的调优过程，直到达到预期的准确性。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{AdaBoostRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{,} \PY{n}{explained\PYZus{}variance\PYZus{}score}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{}加载房屋价格数据库}
+         \PY{n}{housing\PYZus{}data} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{load\PYZus{}boston}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{每个数据点由影响房价的13个输入参数构成。你可以用housing\_data.data获取输入的数
+据，用housing\_data.target获取对应的房屋价格。}\label{ux6bcfux4e2aux6570ux636eux70b9ux7531ux5f71ux54cdux623fux4ef7ux768413ux4e2aux8f93ux5165ux53c2ux6570ux6784ux6210ux4f60ux53efux4ee5ux7528housing_data.dataux83b7ux53d6ux8f93ux5165ux7684ux6570-ux636eux7528housing_data.targetux83b7ux53d6ux5bf9ux5e94ux7684ux623fux5c4bux4ef7ux683c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{housing\PYZus{}data}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{housing\PYZus{}data}\PY{o}{.}\PY{n}{target}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{参数random\_state用来控制如何打乱数据，让我们可以重新生成结果。接下来把数据
+分成训练数据集和测试数据集，其中80\%的数据用于训练，剩余20\%的数据用于测试}\label{ux53c2ux6570random_stateux7528ux6765ux63a7ux5236ux5982ux4f55ux6253ux4e71ux6570ux636eux8ba9ux6211ux4eecux53efux4ee5ux91cdux65b0ux751fux6210ux7ed3ux679cux63a5ux4e0bux6765ux628aux6570ux636e-ux5206ux6210ux8badux7ec3ux6570ux636eux96c6ux548cux6d4bux8bd5ux6570ux636eux96c6ux5176ux4e2d80ux7684ux6570ux636eux7528ux4e8eux8badux7ec3ux5269ux4f5920ux7684ux6570ux636eux7528ux4e8eux6d4bux8bd5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{}把数据 分成训练数据集和测试数据集}
+         \PY{n}{num\PYZus{}training} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.8} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}
+         \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subparagraph{拟合一个决策树回归模型了。选一个最大深度为4的决策树，这样可以限制
+决策树不变成任意深度}\label{ux62dfux5408ux4e00ux4e2aux51b3ux7b56ux6811ux56deux5f52ux6a21ux578bux4e86ux9009ux4e00ux4e2aux6700ux5927ux6df1ux5ea6ux4e3a4ux7684ux51b3ux7b56ux6811ux8fd9ux6837ux53efux4ee5ux9650ux5236-ux51b3ux7b56ux6811ux4e0dux53d8ux6210ux4efbux610fux6df1ux5ea6}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}拟合决策树模型}
+         \PY{n}{dt\PYZus{}regressor} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{dt\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} DecisionTreeRegressor(criterion='mse', max\_depth=4, max\_features=None,
+                    max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+                    min\_impurity\_split=None, min\_samples\_leaf=1,
+                    min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+                    presort=False, random\_state=None, splitter='best')
+\end{Verbatim}
+            
+    \subparagraph{再用带AdaBoost算法的决策树回归模型进行拟合}\label{ux518dux7528ux5e26adaboostux7b97ux6cd5ux7684ux51b3ux7b56ux6811ux56deux5f52ux6a21ux578bux8fdbux884cux62dfux5408}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}AdaBoost算法的决策树回归模型拟合}
+         \PY{n}{ab\PYZus{}regressor} \PY{o}{=} \PY{n}{AdaBoostRegressor}\PY{p}{(}\PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{400}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{ab\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} AdaBoostRegressor(base\_estimator=DecisionTreeRegressor(criterion='mse', max\_depth=4, max\_features=None,
+                    max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+                    min\_impurity\_split=None, min\_samples\_leaf=1,
+                    min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+                    presort=False, random\_state=None, splitter='best'),
+                  learning\_rate=1.0, loss='linear', n\_estimators=400,
+                  random\_state=7)
+\end{Verbatim}
+            
+    \subparagraph{评价决策树回归器的训练效果}\label{ux8bc4ux4ef7ux51b3ux7b56ux6811ux56deux5f52ux5668ux7684ux8badux7ec3ux6548ux679c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{y\PYZus{}pred\PYZus{}dt} \PY{o}{=} \PY{n}{dt\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}dt}\PY{p}{)}
+         \PY{n}{evs} \PY{o}{=} \PY{n}{explained\PYZus{}variance\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred\PYZus{}dt}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZsh{}\PYZsh{}\PYZsh{} 决策树性能 \PYZsh{}\PYZsh{}\PYZsh{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{均方误差(Mean squared error )=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mse}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{解释方差(Explained variance score)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{evs}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\#\#\# 决策树性能 \#\#\#
+
+均方误差(Mean squared error )= 2.77
+
+解释方差(Explained variance score) 0.82
+
+    \end{Verbatim}
+
+    \subparagraph{评价AdaBoost算法改善的效果}\label{ux8bc4ux4ef7adaboostux7b97ux6cd5ux6539ux5584ux7684ux6548ux679c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{y\PYZus{}pred\PYZus{}ab} \PY{o}{=} \PY{n}{ab\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}ab}\PY{p}{)}
+         \PY{n}{evs} \PY{o}{=} \PY{n}{explained\PYZus{}variance\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred\PYZus{}ab}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZsh{}\PYZsh{}\PYZsh{} AdaBoost性能 \PYZsh{}\PYZsh{}\PYZsh{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{均方误差(Mean squared error )=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mse}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{解释方差(Explained variance score)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{evs}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+\#\#\# AdaBoost性能 \#\#\#
+
+均方误差(Mean squared error )= 2.19
+
+解释方差(Explained variance score) 0.91
+
+    \end{Verbatim}
+
+    \subparagraph{结果表明，AdaBoost算法可以让误差更小，且解释方差分更接近1}\label{ux7ed3ux679cux8868ux660eadaboostux7b97ux6cd5ux53efux4ee5ux8ba9ux8befux5deeux66f4ux5c0fux4e14ux89e3ux91caux65b9ux5deeux5206ux66f4ux63a5ux8fd11}
+
+    \subsection{计算特征的相对重要性}\label{ux8ba1ux7b97ux7279ux5f81ux7684ux76f8ux5bf9ux91cdux8981ux6027}
+
+\begin{verbatim}
+所有特征都同等重要吗？在这个案例中，我们用了13个特征，它们对模型都有贡献。但是， 有一个重要的问题出现了：如何判断哪个特征更加重要？显然，所有的特征对结果的贡献是不一 样的。如果需要忽略一些特征，就需要知道哪些特征不太重要。
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{housing\PYZus{}data}\PY{o}{.}\PY{n}{feature\PYZus{}names}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} array(['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD',
+                'TAX', 'PTRATIO', 'B', 'LSTAT'], 
+               dtype='<U7')
+\end{Verbatim}
+            
+    \subparagraph{回归器对象有一个feature\_importances\_方法会告诉我们每个特征的相对重要性。}\label{ux56deux5f52ux5668ux5bf9ux8c61ux6709ux4e00ux4e2afeature_importances_ux65b9ux6cd5ux4f1aux544aux8bc9ux6211ux4eecux6bcfux4e2aux7279ux5f81ux7684ux76f8ux5bf9ux91cdux8981ux6027}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}feature\PYZus{}importances}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}将重要性值标准化}
+             \PY{n}{feature\PYZus{}importances} \PY{o}{=} \PY{l+m+mf}{100.0} \PY{o}{*} \PY{p}{(}\PY{n}{feature\PYZus{}importances} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}将得分从高到底排序}
+             \PY{n}{index\PYZus{}sorted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flipud}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}让X坐标轴上的标签居中显示}
+             \PY{n}{pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{index\PYZus{}sorted}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.5}
+             
+             \PY{c+c1}{\PYZsh{}画条形图}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{pos}\PY{p}{,} \PY{n}{feature\PYZus{}importances}\PY{p}{[}\PY{n}{index\PYZus{}sorted}\PY{p}{]}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{pos}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{n}{index\PYZus{}sorted}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{plot\PYZus{}feature\PYZus{}importances}\PY{p}{(}\PY{n}{dt\PYZus{}regressor}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision Tree Regressor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{housing\PYZus{}data}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{)}
+         \PY{n}{plot\PYZus{}feature\PYZus{}importances}\PY{p}{(}\PY{n}{ab\PYZus{}regressor}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AdaBoost Regressor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{housing\PYZus{}data}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_85_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_85_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{不带AdaBoost算法的决策树回归器显示的最重要特征是RM。加入AdaBoost算法之后，房屋估价模型的最重要特征是LSTAT。在现实生活中，如果对这个
+数据集建立不同的回归器，就会发现最重要的特征是LSTAT，这足以体现AdaBoost算法对决策树
+回归器训练效果的改善。}\label{ux4e0dux5e26adaboostux7b97ux6cd5ux7684ux51b3ux7b56ux6811ux56deux5f52ux5668ux663eux793aux7684ux6700ux91cdux8981ux7279ux5f81ux662frmux52a0ux5165adaboostux7b97ux6cd5ux4e4bux540eux623fux5c4bux4f30ux4ef7ux6a21ux578bux7684ux6700ux91cdux8981ux7279ux5f81ux662flstatux5728ux73b0ux5b9eux751fux6d3bux4e2dux5982ux679cux5bf9ux8fd9ux4e2a-ux6570ux636eux96c6ux5efaux7acbux4e0dux540cux7684ux56deux5f52ux5668ux5c31ux4f1aux53d1ux73b0ux6700ux91cdux8981ux7684ux7279ux5f81ux662flstatux8fd9ux8db3ux4ee5ux4f53ux73b0adaboostux7b97ux6cd5ux5bf9ux51b3ux7b56ux6811-ux56deux5f52ux5668ux8badux7ec3ux6548ux679cux7684ux6539ux5584}
+
+    \subsection{1.9
+评估共享单车的需求分布}\label{ux8bc4ux4f30ux5171ux4eabux5355ux8f66ux7684ux9700ux6c42ux5206ux5e03}
+
+    \subsubsection{随机森林回归器 （random forest
+regressor）}\label{ux968fux673aux68eeux6797ux56deux5f52ux5668-random-forest-regressor}
+
+\begin{verbatim}
+随机森林是一个决策树集合，它基本上就是用一组由数 据集的若干子集构建的决策树构成，再用决策树平均值改善整体学习效果。 
+\end{verbatim}
+
+    \subparagraph{数据集可以在 https://archive.ics.uci.edu/ml/datasets/
+Bike+Sharing+Dataset
+获取。这份数据集一共16列，前两列是序列号与日期，分析的时候可以不
+用；最后三列数据是不同类型的输出结果；最后一列是第十四列与第十五列的和，因此建立模型
+时可以不考虑第十四列与第十五列。}\label{ux6570ux636eux96c6ux53efux4ee5ux5728-httpsarchive.ics.uci.edumldatasets-bikesharingdataset-ux83b7ux53d6ux8fd9ux4efdux6570ux636eux96c6ux4e00ux517116ux5217ux524dux4e24ux5217ux662fux5e8fux5217ux53f7ux4e0eux65e5ux671fux5206ux6790ux7684ux65f6ux5019ux53efux4ee5ux4e0d-ux7528ux6700ux540eux4e09ux5217ux6570ux636eux662fux4e0dux540cux7c7bux578bux7684ux8f93ux51faux7ed3ux679cux6700ux540eux4e00ux5217ux662fux7b2cux5341ux56dbux5217ux4e0eux7b2cux5341ux4e94ux5217ux7684ux548cux56e0ux6b64ux5efaux7acbux6a21ux578b-ux65f6ux53efux4ee5ux4e0dux8003ux8651ux7b2cux5341ux56dbux5217ux4e0eux7b2cux5341ux4e94ux5217}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}导入程序包}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{explained\PYZus{}variance\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}feature\PYZus{}importances}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}将重要性值标准化}
+            \PY{n}{feature\PYZus{}importances} \PY{o}{=} \PY{l+m+mf}{100.0} \PY{o}{*} \PY{p}{(}\PY{n}{feature\PYZus{}importances} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}将得分从高到底排序}
+            \PY{n}{index\PYZus{}sorted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flipud}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{feature\PYZus{}importances}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}让X坐标轴上的标签居中显示}
+            \PY{n}{pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{index\PYZus{}sorted}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.5}
+            
+            \PY{c+c1}{\PYZsh{}画条形图}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{pos}\PY{p}{,} \PY{n}{feature\PYZus{}importances}\PY{p}{[}\PY{n}{index\PYZus{}sorted}\PY{p}{]}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{pos}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{n}{index\PYZus{}sorted}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{在这个函数中，我们从CSV文件读取了所有数据。把数据显示在图形中时，特征名称非常有
+用。把特征名称数据从输入数值中分离出来，并作为函数返回值。}\label{ux5728ux8fd9ux4e2aux51fdux6570ux4e2dux6211ux4eecux4ececsvux6587ux4ef6ux8bfbux53d6ux4e86ux6240ux6709ux6570ux636eux628aux6570ux636eux663eux793aux5728ux56feux5f62ux4e2dux65f6ux7279ux5f81ux540dux79f0ux975eux5e38ux6709-ux7528ux628aux7279ux5f81ux540dux79f0ux6570ux636eux4eceux8f93ux5165ux6570ux503cux4e2dux5206ux79bbux51faux6765ux5e76ux4f5cux4e3aux51fdux6570ux8fd4ux56deux503c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}定义数据集加载函数}
+        \PY{k}{def} \PY{n+nf}{load\PYZus{}dataset}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{n}{file\PYZus{}reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{file\PYZus{}reader}\PY{p}{:}
+                \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{]}\PY{p}{)}
+                \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}提取特征名称}
+                \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}将第一行特征名称移除，仅保留数值}
+                \PY{n}{feature\PYZus{}names}
+\end{Verbatim}
+
+
+    \subparagraph{读取数据，并打乱数据顺序，让新数据与原来文件中数据排列的顺序没有关联性}\label{ux8bfbux53d6ux6570ux636eux5e76ux6253ux4e71ux6570ux636eux987aux5e8fux8ba9ux65b0ux6570ux636eux4e0eux539fux6765ux6587ux4ef6ux4e2dux6570ux636eux6392ux5217ux7684ux987aux5e8fux6ca1ux6709ux5173ux8054ux6027}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bike\PYZus{}day.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}X, y = shuffle(X, y, random\PYZus{}state=7) }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{X}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} array([], dtype=float32)
+\end{Verbatim}
+            
+    \subparagraph{将数据分成训练数据和测试数据}\label{ux5c06ux6570ux636eux5206ux6210ux8badux7ec3ux6570ux636eux548cux6d4bux8bd5ux6570ux636e}
+num_training = int(0.9 * len(X)) 
+num_test = len(X) - num_training 
+# 训练数据 
+X_train = np.array(X[:num_training]).reshape((num_training, 1))  
+y_train = np.array(y[:num_training]) 
+
+# 测试数据 
+X_test = np.array(X[num_training:]).reshape((num_test, 1))  
+y_test = np.array(y[num_training:])
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{num\PYZus{}training} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.9} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{num\PYZus{}training}\PY{p}{]}
+         \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{num\PYZus{}training}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{}训练回归器}
+         \PY{n}{rf\PYZus{}regressor} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{rf\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-58-cfc04cdd2f9a> in <module>()
+          1 \#训练回归器
+          2 rf\_regressor = RandomForestRegressor(n\_estimators=1000, max\_depth=10, min\_samples\_split=1)
+    ----> 3 rf\_regressor.fit(X\_train, y\_train)
+    
+
+        D:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}ensemble\textbackslash{}forest.py in fit(self, X, y, sample\_weight)
+        245         """
+        246         \# Validate or convert input data
+    --> 247         X = check\_array(X, accept\_sparse="csc", dtype=DTYPE)
+        248         y = check\_array(y, accept\_sparse='csc', ensure\_2d=False, dtype=None)
+        249         if sample\_weight is not None:
+    
+
+        D:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}validation.py in check\_array(array, accept\_sparse, dtype, order, copy, force\_all\_finite, ensure\_2d, allow\_nd, ensure\_min\_samples, ensure\_min\_features, warn\_on\_dtype, estimator)
+        439                     "Reshape your data either using array.reshape(-1, 1) if "
+        440                     "your data has a single feature or array.reshape(1, -1) "
+    --> 441                     "if it contains a single sample.".format(array))
+        442             array = np.atleast\_2d(array)
+        443             \# To ensure that array flags are maintained
+    
+
+        ValueError: Expected 2D array, got 1D array instead:
+    array=[].
+    Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
